@@ -1,4 +1,6 @@
 using AlunosAPI.Context;
+using AlunosAPI.Services.Interfaces;
+using AlunosAPI.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -14,6 +16,9 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+//Registrar Interface e Repositório
+builder.Services.AddScoped<IAlunosRepository, AlunosRepository>();
 
 var app = builder.Build();
 
